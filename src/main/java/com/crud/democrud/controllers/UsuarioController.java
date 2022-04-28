@@ -18,8 +18,6 @@ import java.util.Optional;
 public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
-    Response response = new Response();
-    HttpStatus httpStatus = HttpStatus.OK;
 
     @GetMapping()
     public ArrayList<UsuarioModel> obtenerUsuarios() {
