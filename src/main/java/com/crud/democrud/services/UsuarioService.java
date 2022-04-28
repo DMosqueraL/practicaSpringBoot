@@ -40,8 +40,8 @@ public class UsuarioService {
         }
     }
 
-    public UsuarioModel editarSoloEmailUsuarioPorId(UsuarioModel usuario, Long id){
-        return usuarioRepository.;
+    public UsuarioModel actualizarEmailUsuarioPorId(UsuarioModel usuario, Long id){
+        return usuarioRepository.save(usuario);
 
     }
 }

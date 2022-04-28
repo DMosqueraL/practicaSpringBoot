@@ -14,6 +14,6 @@ public interface UsuarioRepository extends CrudRepository<UsuarioModel, Long> {
     public abstract ArrayList<UsuarioModel> findByPrioridad(Integer prioridad);
 
     @Modifying
-    @Query(value = "editar UsuarioModel tel set tel.telefono = :telefono, tel.updatedAt = CURRENT_TIMESTAMP where tel.id = :id")
-    public void updateEmail(@Param(value = "id") Integer id, @Param(value = "email") String email);
+    @Query(value = "id")
+    public void actualizarEmail(@Param(value = "id") Integer id, @Param(value = "email") String email);
 }

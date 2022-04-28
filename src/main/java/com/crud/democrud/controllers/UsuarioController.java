@@ -4,7 +4,7 @@ import com.crud.democrud.models.UsuarioModel;
 import com.crud.democrud.services.UsuarioService;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +18,8 @@ import java.util.Optional;
 public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
-    private Response response = new Response();
-    private HttpStatus httpStatus = HttpStatus.OK;
+    Response response = new Response();
+    HttpStatus httpStatus = HttpStatus.OK;
 
     @GetMapping()
     public ArrayList<UsuarioModel> obtenerUsuarios() {
@@ -51,7 +51,23 @@ public class UsuarioController {
         }
     }
 
-
+    /**
+     * Se agrega el endpoint "actualizar email usuario usando su id"
+     * @param usuario
+     * @param id
+     * @return
+     */
+    @PatchMapping(path = "{id}/email")
+    public UsuarioModel actualizarEmailUsuarioPorId(@RequestBody UsuarioModel usuario, @PathVariable(value = "id") Long id) {
+        return usuarioService.obtenerPorId(id)
+                .map(user -> {
+                    usuario.setEmail(usuario.getEmail());
+                    return usuarioService.guardarUsuario(usuario);
+                }).orElseGet(() -> {
+                    usuario.setId(id);
+                    return usuarioService.guardarUsuario(usuario);
+                });
+    }
 
 
 }
