@@ -2,7 +2,11 @@ package com.crud.democrud.controllers;
 
 import com.crud.democrud.models.UsuarioModel;
 import com.crud.democrud.services.UsuarioService;
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -14,6 +18,8 @@ import java.util.Optional;
 public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
+    private Response response = new Response();
+    private HttpStatus httpStatus = HttpStatus.OK;
 
     @GetMapping()
     public ArrayList<UsuarioModel> obtenerUsuarios() {
@@ -44,5 +50,8 @@ public class UsuarioController {
             return "No pudo eliminar el usuario con id" + id;
         }
     }
+
+
+
 
 }
